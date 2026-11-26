@@ -15,7 +15,13 @@
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Peer"] }],
   // c.sbvh.nl, a custom hostname of the ground.institute zone (q.sbvh.nl's
   // infra/route53.tf points it there), and nowhere else: q, k and l dial c.sbvh.nl.
-  "routes": [{ "pattern": "c.sbvh.nl/*", "zone_name": "ground.institute" }],
+  "routes": [
+    { "pattern": "c.sbvh.nl/*", "zone_name": "ground.institute" },
+    // "ok, so i want C to be the one"
+    // laye's own name. It reaches C once its record goes through Cloudflare;
+    // what C does not answer there goes on to where that record points.
+    { "pattern": "laye.ground.institute/*", "zone_name": "ground.institute" }
+  ],
   "workers_dev": false,
   "vars": {
     // Where a browser's laye dials C.
