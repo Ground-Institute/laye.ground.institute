@@ -18,8 +18,8 @@
   "routes": [
     { "pattern": "c.sbvh.nl/*", "zone_name": "ground.institute" },
     // "ok, so i want C to be the one"
-    // laye's own name. It reaches C once its record goes through Cloudflare;
-    // what C does not answer there goes on to where that record points.
+    // 「[Fable 5.2] laye's own name. It reaches C once its record goes through Cloudflare;」
+    // 「[Fable 5.2] what C does not answer there goes on to where that record points.」
     { "pattern": "laye.ground.institute/*", "zone_name": "ground.institute" }
   ],
   "workers_dev": false,
@@ -29,8 +29,8 @@
     // The topics C carries between the peers connected to it: the cluster's,
     // as q's, k's and l's laye-peer carry it, and laye's own proof's.
     "TOPICS": "laye/cluster,laye/through-a-peer",
-    // laye's own name. A request that reaches C for it, and that C holds no
-    // answer to, is handed on to the laye behind C (src/front.js).
+    // 「[Fable 5.2] laye's own name. A request that reaches C for it, and that C holds no」
+    // 「[Fable 5.2] answer to, is handed on to the laye behind C (src/front.js).」
     "LAYE": "laye.ground.institute"
   },
   "observability": { "enabled": true }

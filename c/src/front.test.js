@@ -1,4 +1,4 @@
-// node --test src/front.test.js
+// 「[Fable 5.2] node --test src/front.test.js」
 
 import assert from "node:assert/strict";
 import { test } from "node:test";

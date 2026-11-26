@@ -1,9 +1,9 @@
 // "that laye itself laye ground institue itself has its own pbt governing itself, and you can see it on github, and that is what verified means"
 // "Ground Institute would be governing laye.ground.institute"
 //
-// What C reads of the pbt it is deployed with: who administers the laye it
-// names. The words are ground's: a `#` line is a comment, a block is a word,
-// perhaps a name, and braces, and inside it `key: value`.
+// 「[Fable 5.2] What C reads of the pbt it is deployed with: who administers the laye it」
+// 「[Fable 5.2] names. The words are ground's: a `#` line is a comment, a block is a word,」
+// 「[Fable 5.2] perhaps a name, and braces, and inside it `key: value`.」
 
 struct Block {
     kind: String,
@@ -66,8 +66,8 @@ fn value(s: &[char], at: &mut usize) -> String {
     s[from..*at].iter().collect()
 }
 
-/// The fields of the block `at` stands in, to its closing brace. A block
-/// inside it is stepped over.
+/// 「[Fable 5.2] The fields of the block `at` stands in, to its closing brace. A block」
+/// 「[Fable 5.2] inside it is stepped over.」
 fn fields(s: &[char], at: &mut usize) -> Vec<(String, String)> {
     let mut out = Vec::new();
     loop {
@@ -144,9 +144,9 @@ fn field<'a>(block: &'a Block, key: &str) -> Option<&'a str> {
         .filter(|v| !v.is_empty())
 }
 
-/// Who a pbt says administers its laye: the administrator of the org that
-/// governs it. None when it names no laye, no org governs it, or that org
-/// names nobody.
+/// 「[Fable 5.2] Who a pbt says administers its laye: the administrator of the org that」
+/// 「[Fable 5.2] governs it. None when it names no laye, no org governs it, or that org」
+/// 「[Fable 5.2] names nobody.」
 pub fn administrator_of(pbt: &str) -> Option<String> {
     let all = blocks(pbt);
     let laye = all.iter().find(|b| b.kind == "laye")?;

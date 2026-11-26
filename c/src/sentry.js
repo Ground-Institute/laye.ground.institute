@@ -38,8 +38,8 @@ export default Sentry.withSentry(options, {
   async fetch(request, env) {
     const url = new URL(request.url);
     // "ok, so i want C to be the one"
-    // At laye's own name C stands in front: what it does not answer itself
-    // goes on, as it came, to the laye that name's record points at.
+    // 「[Fable 5.2] At laye's own name C stands in front: what it does not answer itself」
+    // 「[Fable 5.2] goes on, as it came, to the laye that name's record points at.」
     if (handedOn(url, env.LAYE)) return fetch(request);
     const peer = env.PEER.get(env.PEER.idFromName("c"));
     if (url.pathname === "/health") {
