@@ -23,6 +23,11 @@ futures-timer = { version = "=3.0.4", features = ["wasm-bindgen"] }
 base64 = "=0.22.1"
 serde_json = "=1.0.143"
 
+# 「[Fable 5.2] The tests run as wasm, as C does: `wasm-pack test --node`, which fetches the」
+# 「[Fable 5.2] wasm-bindgen Cargo.lock names and runs them under node.」
+[dev-dependencies]
+wasm-bindgen-test = "=0.3.71"
+
 [profile.release]
 opt-level = "z"
 lto = true

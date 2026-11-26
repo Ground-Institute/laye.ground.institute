@@ -1,10 +1,55 @@
 {
-  "concurrency": {
-    "cancel-in-progress": false,
-    "group": "c"
-  },
   "jobs": {
+    "check": {
+      "runs-on": "ubuntu-latest",
+      "steps": [
+        {
+          "uses": "actions/checkout@v5"
+        },
+        {
+          "uses": "dtolnay/rust-toolchain@stable",
+          "with": {
+            "components": "clippy",
+            "targets": "wasm32-unknown-unknown"
+          }
+        },
+        {
+          "name": "c/ compiles as wasm32",
+          "run": "cargo check --target wasm32-unknown-unknown --all-targets",
+          "working-directory": "c"
+        },
+        {
+          "name": "clippy says nothing",
+          "run": "cargo clippy --target wasm32-unknown-unknown --all-targets -- -D warnings",
+          "working-directory": "c"
+        },
+        {
+          "uses": "taiki-e/install-action@v2",
+          "with": {
+            "tool": "wasm-pack"
+          }
+        },
+        {
+          "name": "its tests pass as wasm32",
+          "run": "wasm-pack test --node",
+          "working-directory": "c"
+        },
+        {
+          "name": "what C hands on is what it should",
+          "run": "node --test src/front.test.js",
+          "working-directory": "c"
+        }
+      ]
+    },
     "deploy": {
+      "concurrency": {
+        "cancel-in-progress": false,
+        "group": "c"
+      },
+      "if": "github.event_name == 'push'",
+      "needs": [
+        "check"
+      ],
       "runs-on": "ubuntu-latest",
       "steps": [
         {
@@ -31,6 +76,7 @@
   },
   "name": "c",
   "on": {
+    "pull_request": {},
     "push": {
       "branches": [
         "main"

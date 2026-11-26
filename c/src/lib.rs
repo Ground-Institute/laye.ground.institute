@@ -17,7 +17,14 @@ use worker::{
     console_log, durable_object,
 };
 
+mod pbt;
+
 const IDENTIFY: &str = "/laye/1.0.0";
+
+// "that laye itself laye ground institue itself has its own pbt governing itself, and you can see it on github, and that is what verified means"
+// 「[Fable 5.2] The pbt C is deployed with, as this repository holds it.」
+const GOVERNED_BY: &str = include_str!("../../controls/laye.pbt");
+const ADMINISTRATOR: &str = "/laye/administrator/";
 
 // 「[Opus 5.5] The Worker in front of Peer is src/sentry.js, so Sentry wraps a
 // plain handler.」
@@ -119,6 +126,16 @@ impl DurableObject for Peer {
     }
 
     async fn fetch(&self, req: Request) -> Result<Response> {
+        // "its the story of someone verifying they can trust laye the network they are about to join, with their agent"
+        // 「[Fable 5.2] Whether the account a name is administers this laye, as the pbt C is」
+        // 「[Fable 5.2] deployed with says; and nothing else about anyone.」
+        let path = req.path();
+        if let Some(name) = path.strip_prefix(ADMINISTRATOR) {
+            let administers = pbt::administrator_of(GOVERNED_BY).as_deref() == Some(name);
+            return Response::from_json(
+                &serde_json::json!({ "administrator": name, "administers": administers }),
+            );
+        }
         self.started()?;
         if req.path() == "/peer" {
             let held = self.held.borrow();
