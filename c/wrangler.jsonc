@@ -1,0 +1,28 @@
+{
+  "name": "c",
+  // The Rust worker-build makes, as @sentry/cloudflare wraps it.
+  "main": "src/sentry.js",
+  "compatibility_date": "2026-11-01",
+  // @sentry/cloudflare keeps its scope per request in AsyncLocalStorage.
+  "compatibility_flags": ["nodejs_compat"],
+  "build": {
+    "command": "npm ci --silent && cargo install -q worker-build@=0.8.0 && worker-build --release"
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "PEER", "class_name": "Peer" }]
+  },
+  // SQLite-backed, the kind of Durable Object the free plan has.
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Peer"] }],
+  // c.sbvh.nl, a custom hostname of the ground.institute zone (q.sbvh.nl's
+  // infra/route53.tf points it there), and nowhere else: q, k and l dial c.sbvh.nl.
+  "routes": [{ "pattern": "c.sbvh.nl/*", "zone_name": "ground.institute" }],
+  "workers_dev": false,
+  "vars": {
+    // Where a browser's laye dials C.
+    "LISTEN": "/dns4/c.sbvh.nl/tcp/443/wss",
+    // The topics C carries between the peers connected to it: the cluster's,
+    // as q's, k's and l's laye-peer carry it, and laye's own proof's.
+    "TOPICS": "laye/cluster,laye/through-a-peer"
+  },
+  "observability": { "enabled": true }
+}

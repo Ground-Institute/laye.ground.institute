@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "dependencies": {
+    "@sentry/cloudflare": "11.16.0"
+  }
+}
