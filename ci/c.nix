@@ -40,6 +40,8 @@ in
       }
       # wasm-pack fetches the wasm-bindgen c/Cargo.lock names, and runs the tests under node.
       (inC "its tests pass as wasm32" "wasm-pack test --node")
+      # What C hands on at laye's own name, and what it answers itself (c/src/front.js).
+      (inC "what C hands on is what it should" "node --test src/front.test.js")
     ];
   };
   jobs.deploy = {

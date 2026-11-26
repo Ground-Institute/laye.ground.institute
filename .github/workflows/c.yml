@@ -33,6 +33,11 @@
           "name": "its tests pass as wasm32",
           "run": "wasm-pack test --node",
           "working-directory": "c"
+        },
+        {
+          "name": "what C hands on is what it should",
+          "run": "node --test src/front.test.js",
+          "working-directory": "c"
         }
       ]
     },

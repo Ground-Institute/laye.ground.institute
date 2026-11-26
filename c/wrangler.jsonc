@@ -22,7 +22,10 @@
     "LISTEN": "/dns4/c.sbvh.nl/tcp/443/wss",
     // The topics C carries between the peers connected to it: the cluster's,
     // as q's, k's and l's laye-peer carry it, and laye's own proof's.
-    "TOPICS": "laye/cluster,laye/through-a-peer"
+    "TOPICS": "laye/cluster,laye/through-a-peer",
+    // laye's own name. A request that reaches C for it, and that C holds no
+    // answer to, is handed on to the laye behind C (src/front.js).
+    "LAYE": "laye.ground.institute"
   },
   "observability": { "enabled": true }
 }
