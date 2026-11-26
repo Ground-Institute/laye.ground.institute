@@ -22,9 +22,7 @@ in
 {
   name = "c";
   on = {
-    # "make it deploy from a branch temporarily"
-    # 「[Fable 5.2] c-says-who-administers goes from this list when it is on main.」
-    push.branches = [ "main" "c-says-who-administers" ];
+    push.branches = [ "main" ];
     pull_request = { };
   };
   jobs.check = {

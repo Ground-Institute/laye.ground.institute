@@ -79,8 +79,7 @@
     "pull_request": {},
     "push": {
       "branches": [
-        "main",
-        "c-says-who-administers"
+        "main"
       ]
     }
   }
