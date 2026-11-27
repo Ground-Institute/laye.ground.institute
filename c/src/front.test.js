@@ -7,12 +7,8 @@ import { handedOn } from "./front.js";
 const LAYE = "laye.ground.institute";
 const at = (href) => new URL(href);
 
-test("at laye's name, C answers who administers it", () => {
-  assert.equal(handedOn(at("https://laye.ground.institute/laye/administrator/teranos"), LAYE), false);
-});
-
-test("at laye's name, everything else is handed on as it came", () => {
-  for (const path of ["/", "/laye/me", "/laye/passkey/signin/begin", "/auth/token", "/laye/invitations", "/health", "/peer"]) {
+test("at laye's name, everything is handed on as it came, who administers it too", () => {
+  for (const path of ["/", "/laye/administrator/teranos", "/laye/me", "/laye/passkey/signin/begin", "/auth/token", "/laye/invitations", "/health", "/peer"]) {
     assert.equal(handedOn(at(`https://laye.ground.institute${path}`), LAYE), true, path);
   }
 });
